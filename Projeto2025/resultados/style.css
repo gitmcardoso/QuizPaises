@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    height: 100px;
+    background-color: rgba(2, 128, 144, 1);
+}
+
+img {
+    
+    height: 100px;
+    
+    
+}
+
+
+h1{
+    color: white;
+    padding: 10px ;
+    
+}
+
+.rankingg{
+
+   
+    
+    color: rgba(2, 128, 144, 1);
+    padding: 10px ;
+   
+    
+    
+}
+
+.ranking{
+    border: 1px solid  rgba(2, 128, 144, 1) ;
+    align-items: center;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+.content{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.tableContent {
+
+    justify-content: center;
+    display: flex;
+    height: 1%;
+    
+
+    
+  
+  
+}
+table {
+
+    border-collapse: collapse;
+    width: 800px;
+    padding: 8px;
+ }
+
+
+td{
+    border: 1px solid rgba(2, 128, 144, 1)
+}
+
+th {
+    background: rgba(2, 128, 144, 1);
+    color: white;
+}

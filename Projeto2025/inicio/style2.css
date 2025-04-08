@@ -1,0 +1,100 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+    height: 100px;
+    background-color: rgba(2, 128, 144, 1);
+}
+
+img {
+    
+    height: 100px;
+    
+    
+}
+
+
+h1{
+    color: white;
+    padding: 10px ;
+}
+
+.content{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    
+       display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+
+
+
+}
+
+button {
+    width: 270px;
+    height: 80px;
+    
+    border-color: rgba(2, 128, 144, 1) ;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: rgba(2, 128, 144, 1);
+    color: #fff;
+   
+}
+
+
+.input-group {
+    margin: 20px 0;
+    position: relative;
+}
+
+.input-group label {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 15px;
+    font-size: 16px;
+    pointer-events: none;
+    color: rgb(218, 223, 223);
+    padding: 0 5px;
+    transition: .5s;
+}
+
+.input-group input {
+    width: 360px;
+    height: 60px;
+    color: rgba(2, 128, 144, 1);
+    font-size: 16px;
+    padding: 0 15px;
+    border: 1.2px solid rgb(154, 214, 214);
+    background: transparent;
+    outline: none;
+    border-radius: 5px;
+}
+
+.input-group input:focus~label,
+.input-group input:valid~label {
+    top: 0;
+    background: rgba(2, 128, 144, 1);
+    font-size: 14px;
+}
