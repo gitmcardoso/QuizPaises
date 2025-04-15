@@ -1,17 +1,26 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #38A3A5;
     margin: 0;
     padding: 0;
+    position: absolute;
+    inset: 0;
+
+    
+
 }
 
 .quiz {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    inset: 0;
     
+
 }
+
+
 
 .header {
     display: flex;
@@ -138,6 +147,3 @@ button:active {
     justify-content: center;
    
   }
-
-
- 

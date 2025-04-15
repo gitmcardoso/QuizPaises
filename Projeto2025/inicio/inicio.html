@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="script2.js">
 </head>
 <body>
 
@@ -19,18 +18,35 @@
 
     <div class="content">
 
-        <h2>Insira seu nome</h2>
-
-        <div class="input-group">
-            <input type="text" required>
-            <label for="">Username</label>
-        </div>
+        <div class="input__container">
+            <div class="shadow__input"></div>
+            <button class="input__button__shadow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#000000"
+                width="20px"
+                height="20px"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                ></path>
+              </svg>
+            </button>
+            <input
+              type="text"
+              name="username"
+              class="input__search"
+              placeholder="username"
+            />
+            <button id="ss">
+                Entrar
+            </button>
+          </div>
+          
 
         
-
-        <button id = 'comecar' class="start"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-          </svg></button>
 
 
     </div>
@@ -38,9 +54,10 @@
 
 
     <script>
-        document.getElementById('comecar').onclick = function() {
+        document.getElementById('ss').onclick = function() {
         window.location.href = "../jogo/index.html";
         }
     </script>
+    
 </body>
 </html>
