@@ -2,20 +2,22 @@ let score = 0;
 let paisCorreto = {}; 
 let todosPaises = [];
 
+
+
 function exibirDadosPais(infoPais) {
     document.getElementById('country-flag').src = infoPais.flags.png;
     document.getElementById('country-name').textContent = `Qual é o país desta bandeira?`;
     
-    let options = gerarOpcoes(infoPais.translations.pt);
-    opcoesDisplay(options, infoPais.translations.pt);
+    let options = gerarOpcoes(infoPais.translations.por.common);
+    opcoesDisplay(options, infoPais.translations.por.common);
 }
 
 function gerarOpcoes(paisCorreto) {
     let opcoes = [paisCorreto];
     while (opcoes.length < 4) {
         const gerarPais = todosPaises[Math.floor(Math.random() * todosPaises.length)];
-        if (!opcoes.includes(gerarPais.translations.pt)) {
-            opcoes.push(gerarPais.translations.pt);
+        if (!opcoes.includes(gerarPais.translations.por.common)) {
+            opcoes.push(gerarPais.translations.por.common);
         }
     }
     opcoes.sort(() => Math.random() - 0.5);
@@ -82,7 +84,7 @@ function verificarResposta(opcaoSelec, paisCorreto) {
 
 async function obterNovaBandeira() {
     document.getElementById('score').textContent = `Pontuação: ${score}`;
-    const url = 'https://restcountries.com/v2/all';
+    const url = 'https://restcountries.com/v3.1/all';
     const response = await fetch(url);
     todosPaises = await response.json();
     paisCorreto = todosPaises[Math.floor(Math.random() * todosPaises.length)];
