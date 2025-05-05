@@ -1,90 +1,70 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-}
-
-
-
-.header {
+    text-align: center;
+  }
+  
+  .header {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    
     height: 100px;
     background-color: rgba(2, 128, 144, 1);
-}
-
-img {
-    
-    height: 100px;
-    
-    
-}
-
-
-h1{
+  }
+  
+  .header img {
+    height: 80px;
+    margin-right: 15px;
+  }
+  
+  h1 {
     color: white;
-    padding: 10px ;
-    
-}
-
-.rankingg{
-
-   
-    
-    color: rgba(2, 128, 144, 1);
-    padding: 10px ;
-   
-    
-    
-}
-
-.ranking{
-    border: 1px solid  rgba(2, 128, 144, 1) ;
-    align-items: center;
-    width: 600px;
+    margin: 0;
+  }
+  
+  .content {
     display: flex;
-    justify-content: center;
-    
-}
-
-
-.content{
-
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-}
-
-.tableContent {
-
-    justify-content: center;
-    display: flex;
-    height: 1%;
-    
-
-    
+    padding: 20px;
+  }
   
+  .tableContent {
+    width: 100%;
+    max-width: 900px;
+    padding: 10px;
+  }
   
-}
-table {
-
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
     border-collapse: collapse;
-    width: 800px;
-    padding: 8px;
- }
-
-
-td{
-    border: 1px solid rgba(2, 128, 144, 1)
-}
-
-th {
-    background: rgba(2, 128, 144, 1);
+    margin: 0 auto;
+    background-color: white;
+  }
+  
+  caption {
+    caption-side: top;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    color: #028090;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid rgba(2, 128, 144, 1);
+    text-align: center;
+  }
+  
+  th {
+    background-color: rgba(2, 128, 144, 1);
     color: white;
-}
+  }
+  
