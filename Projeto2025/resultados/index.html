@@ -1,85 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ranking</title>
+    <title>Ranking</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="script.js">
-    
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <div class="header">
-
-
-        <div class="title"> <img src="img/logo.png"></div>
+        <div class="title">
+            <img src="img/logo.png" alt="Logo">
+        </div>
         <h1 class="tiulo"> FLAGQUEST </h1>
-        
     </div>
 
-
     <div class="content">
-
-
         <div class="ranking">
             <h1 class="rankingg">RANKING</h1>
         </div>
 
-        
-
-
         <div class="tableContent">
-            
             <table>
-
-                <tr>
-    
-                    <th>name</th>
-                    <th>points</tr>
-    
-                </tr>
-    
-    
-                <tr>
-                    <td>fulano</td>
-                    <td>278points</td>
-                </tr>
-    
-                <tr>
-                    <td>fulano</td>
-                    <td>278points</td>
-                </tr>
-    
-                <tr>
-                    <td>fulano</td>
-                    <td>278points</td>
-                </tr>
-    
-                <tr>
-                    <td>fulano</td>
-                    <td>278points</td>
-                </tr>
-    
-                <tr>
-                    <td>fulano</td>
-                    <td>278points</td>
-                </tr>
-    
-    
-    
-    
-    
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Pontuação</th>
+                        <th>Tempo</th>
+                    </tr>
+                </thead>
+                <tbody id="ranking-table-body">
+                    <!-- Aqui os dados do ranking serão inseridos dinamicamente -->
+                </tbody>
             </table>
-
-
         </div>
-
-    
-
-
-
     </div>
-    
+
+    <script>
+        function carregarRanking() {
+            const ranking = JSON.parse(localStorage.getItem('ranking')) || []; 
+            const rankingTableBody = document.getElementById('ranking-table-body'); 
+
+            ranking.sort((a, b) => b.score - a.score);
+
+            rankingTableBody.innerHTML = '';
+
+            ranking.slice(0, 10).forEach((entry, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${entry.name}</td>
+                    <td>${entry.score} pontos</td>
+                    <td>${entry.time}</td>
+                `;
+                rankingTableBody.appendChild(tr);
+            });
+        }
+
+        window.onload = function() {
+            carregarRanking();
+        };
+    </script>
+
 </body>
 </html>

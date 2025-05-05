@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,42 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./app.js" defer></script>
 </head>
+
 <body>
     <main>
-
-
         <div class="header">
-
-
-            <div class="title"> <img src="img/logo.png"></div>
+            <div class="title">
+                <img src="img/logo.png" alt="Logo">
+            </div>
             <h1 class="tiulo"> FLAGQUEST </h1>
-            
         </div>
-        
+
+        <div id="nomeDoUser">
+            <h2>Username:</h2>
+        </div>
+
         <div class="quiz">
-            
             <div class="country">
                 <img id="country-flag" class="country__flag" src="./img/logo.png" alt="Country Flag">
                 <h2 id="country-name" class="country__name">Acerte o país da bandeira</h2>
                 <div id="country-options" class="country__options">
                 </div>
-                <p id="score" class="country__score">Pontuação: 0</p> <!-- exibe a pontuacao -->
+                <p id="score" class="country__score">Pontuação: 0</p> 
+                <p id="contador" class="country__contador">Bandeiras restantes: </p> 
             </div>
             <button id="next-button" style="display:none;">Próxima Bandeira</button>
         </div>
-
         
+
+        <div id="timer">05:00</div> 
     </main>
+
+    <script>
+        let nomeUser = localStorage.getItem('nomeUser') || 'desconhecido';
+        console.log(nomeUser);
+        document.getElementById('nomeDoUser').innerHTML = nomeUser;
+    </script>
+    <script src="app.js"></script>
 </body>
+
 </html>

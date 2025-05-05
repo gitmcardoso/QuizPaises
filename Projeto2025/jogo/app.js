@@ -1,105 +1,147 @@
-let score = 0; 
-let paisCorreto = {}; 
+let score = 0;
+let paisCorreto = {};
 let todosPaises = [];
+let paisesRestantes = [];
+let totalDeBandeiras = 10;
+let nomeUsuario = "";
 
+const nome = localStorage.getItem('nomeUser');
 
+fetch('http://localhost:1880/getUsuario')
+  .then(response => response.json())
+  .then(data => {
+    console.log("Nome recebido:", data.nome);
+    document.getElementById("nomeDoUser").innerText = data.nome;
+  })
+  .catch(error => console.error('Erro ao buscar dados do Node-RED:', error));
 
 function exibirDadosPais(infoPais) {
-    document.getElementById('country-flag').src = infoPais.flags.png;
-    document.getElementById('country-name').textContent = `Qual é o país desta bandeira?`;
-    
-    let options = gerarOpcoes(infoPais.translations.por.common);
-    opcoesDisplay(options, infoPais.translations.por.common);
+  document.getElementById('country-flag').src = infoPais.flags.png;
+  document.getElementById('country-name').textContent = `Qual é o país desta bandeira?`;
+
+  let options = gerarOpcoes(infoPais.translations.por.common);
+  opcoesDisplay(options, infoPais.translations.por.common);
 }
 
 function gerarOpcoes(paisCorreto) {
-    let opcoes = [paisCorreto];
-    while (opcoes.length < 4) {
-        const gerarPais = todosPaises[Math.floor(Math.random() * todosPaises.length)];
-        if (!opcoes.includes(gerarPais.translations.por.common)) {
-            opcoes.push(gerarPais.translations.por.common);
-        }
+  let opcoes = [paisCorreto];
+  while (opcoes.length < 4) {
+    const gerarPais = todosPaises[Math.floor(Math.random() * todosPaises.length)];
+    const nome = gerarPais.translations?.por?.common;
+    if (nome && !opcoes.includes(nome)) {
+      opcoes.push(nome);
     }
-    opcoes.sort(() => Math.random() - 0.5);
-    console.log(opcoes)
-    return opcoes;
+  }
+  return opcoes.sort(() => Math.random() - 0.5);
 }
 
 function opcoesDisplay(options, paisCorreto) {
-    const opcoesEscolha = document.getElementById('country-options');
-    opcoesEscolha.innerHTML = ''; 
+  const opcoesEscolha = document.getElementById('country-options');
+  opcoesEscolha.innerHTML = '';
 
-    options.forEach(option => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.onclick = () => verificarResposta(option, paisCorreto);
-        opcoesEscolha.appendChild(button);
-    });
-}
-
-function pularBandeira(){
-  console.log('ativo')
-  document.getElementById('next-button').style.display = 'inline-block';
-  document.getElementById('next-button').onclick = function(){
-    if(score == 0){
-      console.log('Você pulou e perdeu um ponto!')
-      obterNovaBandeira()
-    }
-    else{
-    obterNovaBandeira(score -=1)
-    alert('você pulou e perdeu 1 ponto!')
-    }
-  };
-
+  options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.onclick = () => verificarResposta(option, paisCorreto);
+    opcoesEscolha.appendChild(button);
+  });
 }
 
 function verificarResposta(opcaoSelec, paisCorreto) {
-    console.log(score)
-    if (opcaoSelec === paisCorreto) {
-        score += 5; // Add 5 
-        document.body.style.backgroundColor = "#228B22";
-        obterNovaBandeira();
+  if (opcaoSelec === paisCorreto) {
+    score += 5;
+    document.body.style.backgroundColor = "#228B22";
+  } else {
+    document.body.style.backgroundColor = "#DC143C";
+    if (score > 0) {
+      score -= (score < 3) ? 1 : 3;
     }
-    else{
-        document.body.style.backgroundColor = "#DC143C";
-        if(score == 0){
-          console.log('você errou!')
-        }
-        else{
-          if(score < 3){
-          score-=1
-          }
-          else{
-            score-=3
-          }
-        }
+  }
 
-        obterNovaBandeira();
+  document.getElementById('score').textContent = `Pontuação: ${score}`;
+  pularBandeira();
+  obterNovaBandeira();
+}
 
+function pularBandeira() {
+  document.getElementById('next-button').style.display = 'inline-block';
+  document.getElementById('next-button').onclick = function () {
+    if (score > 0) {
+      score -= 1;
+      alert('Você pulou e perdeu 1 ponto!');
+    } else {
+      console.log('Você pulou e perdeu um ponto!');
     }
+
     document.getElementById('score').textContent = `Pontuação: ${score}`;
-    
-    pularBandeira()
+    obterNovaBandeira();
+  };
+}
+
+function atualizarContador() {
+  const contador = document.getElementById('contador');
+  contador.textContent = `Bandeiras restantes: ${paisesRestantes.length}`;
 }
 
 async function obterNovaBandeira() {
-    document.getElementById('score').textContent = `Pontuação: ${score}`;
+  if (todosPaises.length === 0) {
     const url = 'https://restcountries.com/v3.1/all';
     const response = await fetch(url);
     todosPaises = await response.json();
-    paisCorreto = todosPaises[Math.floor(Math.random() * todosPaises.length)];
+    paisesRestantes = [...todosPaises]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, totalDeBandeiras);
+  }
+
+  if (paisesRestantes.length > 0) {
+    paisCorreto = paisesRestantes.pop();
     exibirDadosPais(paisCorreto);
-    score
+    atualizarContador();
+  } else {
+    clearInterval(interval);
+
+    alert("Parabéns! Você terminou todas as bandeiras.");
+    document.getElementById('country-flag').src = '';
+    document.getElementById('country-name').textContent = '';
+    document.getElementById('country-options').innerHTML = '';
+    document.getElementById('contador').textContent = `Fim do jogo. Pontuação final: ${score}`;
+    
+
+    const rankingButton = document.createElement('button');
+    rankingButton.textContent = "Ver Ranking";
+    rankingButton.onclick = function() {
+      const timeFinal = formatTime(time);
+      const userData = {
+        name: nomeUser || "Desconhecido",
+        score: score,
+        time: timeFinal,
+      };
+
+      let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+      ranking.push(userData);
+      localStorage.setItem('ranking', JSON.stringify(ranking));
+
+      window.location.href = "../resultados/index.html";
+    };
+
+    document.body.appendChild(rankingButton);
+  }
 }
 
-obterNovaBandeira()
+function formatTime(time) {
+  let minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+  return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
+
+obterNovaBandeira();
 
 let timerDisplay = document.getElementById('timer');
-let time = 300; // 5 minutos em segundos
+let time = 300;
 let interval;
 
 function startTimer() {
-  interval = setInterval(function() {
+  interval = setInterval(function () {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
 
@@ -111,14 +153,23 @@ function startTimer() {
     if (time <= 0) {
       clearInterval(interval);
       alert('O tempo acabou!');
+
+      const timeFinal = formatTime(0);
+      const userData = {
+        name: nomeUser || "Desconhecido",
+        score: score,
+        time: timeFinal,
+      };
+
+      let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+      ranking.push(userData);
+      localStorage.setItem('ranking', JSON.stringify(ranking));
+
+      window.location.href = "ranking.html";
     }
 
     time--;
   }, 1000);
 }
 
-startButton.addEventListener('click', function() {
-  if (!interval) {
-    startTimer();
-  }
-});
+startTimer();
