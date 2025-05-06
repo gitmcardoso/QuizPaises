@@ -7,13 +7,6 @@ let nomeUsuario = "";
 
 const nome = localStorage.getItem('nomeUser');
 
-fetch('http://localhost:1880/getUsuario')
-  .then(response => response.json())
-  .then(data => {
-    console.log("Nome recebido:", data.nome);
-    document.getElementById("nomeDoUser").innerText = data.nome;
-  })
-  .catch(error => console.error('Erro ao buscar dados do Node-RED:', error));
 
 function exibirDadosPais(infoPais) {
   document.getElementById('country-flag').src = infoPais.flags.png;
@@ -101,27 +94,46 @@ async function obterNovaBandeira() {
     clearInterval(interval);
 
     alert("Parabéns! Você terminou todas as bandeiras.");
-    document.getElementById('country-flag').src = '';
+    document.getElementById('country-flag').src = './img/logo.png';
     document.getElementById('country-name').textContent = '';
     document.getElementById('country-options').innerHTML = '';
+    document.getElementById('next-button').disabled = 'false';
     document.getElementById('contador').textContent = `Fim do jogo. Pontuação final: ${score}`;
     
 
     const rankingButton = document.createElement('button');
     rankingButton.textContent = "Ver Ranking";
     rankingButton.onclick = function() {
-      const timeFinal = formatTime(time);
+      const elapsed = 300 - time;
       const userData = {
         name: nomeUser || "Desconhecido",
         score: score,
-        time: timeFinal,
+        time: elapsed,
+        secondsElapsed: elapsed
       };
+      console.log(`Tempo decorrido: ${elapsed} segundos`);
+
 
       let ranking = JSON.parse(localStorage.getItem('ranking')) || [];
       ranking.push(userData);
       localStorage.setItem('ranking', JSON.stringify(ranking));
 
-      window.location.href = "../resultados/index.html";
+      fetch('http://localhost:1880/salvarRanking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        
+        body: JSON.stringify(userData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Ranking salvo com sucesso:', data);
+        window.location.href = "../resultados/index.html";
+      })
+      .catch(error => {
+        console.error('Erro ao salvar ranking:', error);
+      });
     };
 
     document.body.appendChild(rankingButton);
@@ -133,6 +145,8 @@ function formatTime(time) {
   let seconds = time % 60;
   return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 }
+
+
 
 obterNovaBandeira();
 
@@ -165,7 +179,7 @@ function startTimer() {
       ranking.push(userData);
       localStorage.setItem('ranking', JSON.stringify(ranking));
 
-      window.location.href = "ranking.html";
+      window.location.href = "../resultados/index.html";
     }
 
     time--;

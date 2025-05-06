@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
 
     <div class="header">
@@ -18,12 +20,16 @@
 
     <div class="content">
         <div class="ranking">
-            <h1 class="rankingg">RANKING</h1>
         </div>
+
 
         <div class="tableContent">
             <table>
                 <thead>
+                    <caption>RANKING - TOP 20</caption>
+                    <br>
+                    <div class="user-position" id="user-position">
+                    </div>
                     <tr>
                         <th>Nome</th>
                         <th>Pontuação</th>
@@ -31,7 +37,6 @@
                     </tr>
                 </thead>
                 <tbody id="ranking-table-body">
-                    <!-- Aqui os dados do ranking serão inseridos dinamicamente -->
                 </tbody>
             </table>
         </div>
@@ -39,28 +44,37 @@
 
     <script>
         function carregarRanking() {
-            const ranking = JSON.parse(localStorage.getItem('ranking')) || []; 
-            const rankingTableBody = document.getElementById('ranking-table-body'); 
+            fetch('http://localhost:1880/getRanking')
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.sort((a, b) => b.score - a.score);
 
-            ranking.sort((a, b) => b.score - a.score);
+                        const rankingTableBody = document.getElementById('ranking-table-body');
+                        rankingTableBody.innerHTML = ''; 
 
-            rankingTableBody.innerHTML = '';
-
-            ranking.slice(0, 10).forEach((entry, index) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${entry.name}</td>
-                    <td>${entry.score} pontos</td>
-                    <td>${entry.time}</td>
-                `;
-                rankingTableBody.appendChild(tr);
-            });
+                        data.slice(0, 20).forEach(entry => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${entry.name}</td>
+                                <td>${entry.score} pontos</td>
+                                <td>${entry.time} segundos </td>
+                            `;
+                            rankingTableBody.appendChild(tr);
+                        });
+                    } else {
+                        console.error("Os dados do ranking estão em um formato inesperado.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar o ranking:', error);
+                });
         }
 
         window.onload = function() {
             carregarRanking();
         };
     </script>
-
 </body>
+<script src="script.js"></script>
 </html>

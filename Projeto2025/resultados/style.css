@@ -1,70 +1,83 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100px;
-    background-color: rgba(2, 128, 144, 1);
-  }
-  
-  .header img {
-    height: 80px;
-    margin-right: 15px;
-  }
-  
-  h1 {
-    color: white;
-    margin: 0;
-  }
-  
-  .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .tableContent {
-    width: 100%;
-    max-width: 900px;
-    padding: 10px;
-  }
-  
-  .table-wrapper {
-    overflow-x: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    background-color: white;
-  }
-  
-  caption {
-    caption-side: top;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px;
-    text-align: center;
-    color: #028090;
-  }
-  
-  th, td {
-    padding: 12px;
-    border: 1px solid rgba(2, 128, 144, 1);
-    text-align: center;
-  }
-  
-  th {
-    background-color: rgba(2, 128, 144, 1);
-    color: white;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: rgba(2, 128, 144, 1);
+}
+
+.header img {
+  height: 80px;
+  margin-right: 15px;
+}
+
+h1 {
+  color: white;
+  margin: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.tableContent {
+  width: 100%;
+  max-width: 900px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  background-color: white;
+}
+
+caption {
+  caption-side: top;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  color: #028090;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid rgba(2, 128, 144, 1);
+  text-align: center;
+}
+
+th {
+  background-color: rgba(2, 128, 144, 1);
+  color: white;
+}
+
+.country__tempo {
+  font-size: 1.9em;
+  color: #333;
+  margin-top: 10px;
+}
+
+.user-position{
+  font-size: 1.2em;
+  color: #333;
+  margin-top: 10px;
+  justify-content: center;
+}
