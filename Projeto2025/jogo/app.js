@@ -121,6 +121,7 @@ async function obterNovaBandeira() {
       fetch('https://8857-200-211-208-194.ngrok-free.app/salvarRanking', {
         method: 'POST',
         headers: {
+          'ngrok-skip-browser-warning': 'true', 
           'Content-Type': 'application/json'
         },
         
