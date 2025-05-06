@@ -1,0 +1,196 @@
+[
+    {
+        "id": "8fb71ab774db98c6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "26c89a824a10c8f5",
+        "type": "http in",
+        "z": "8fb71ab774db98c6",
+        "name": "Salvar Ranking",
+        "url": "/salvarRanking",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "08c5256d16a6dc7d",
+                "76e2a1e0cd4e51be"
+            ]
+        ]
+    },
+    {
+        "id": "08c5256d16a6dc7d",
+        "type": "json",
+        "z": "8fb71ab774db98c6",
+        "name": "JSON Parse",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 520,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "76e2a1e0cd4e51be",
+        "type": "file in",
+        "z": "8fb71ab774db98c6",
+        "name": "Ler ranking.json",
+        "filename": "G:\\QuizPaises-main\\QuizPaises-main\\Projeto2025\\resultados\\ranking.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": true,
+        "encoding": "none",
+        "allProps": false,
+        "x": 540,
+        "y": 380,
+        "wires": [
+            [
+                "c7c7fc2336edb630"
+            ]
+        ]
+    },
+    {
+        "id": "c7c7fc2336edb630",
+        "type": "function",
+        "z": "8fb71ab774db98c6",
+        "name": "Atualizar Ranking",
+        "func": "let rankingAtual = [];\ntry {\n    rankingAtual = JSON.parse(msg.payload);\n} catch (e) {\n    rankingAtual = [];\n}\n\nconst novoItem = msg.req.body;\nif (!Array.isArray(rankingAtual)) rankingAtual = [];\nrankingAtual.push(novoItem);\n\nmsg.payload = JSON.stringify(rankingAtual, null, 2);\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 380,
+        "wires": [
+            [
+                "fed3669e3c4e0f07"
+            ]
+        ]
+    },
+    {
+        "id": "fed3669e3c4e0f07",
+        "type": "file",
+        "z": "8fb71ab774db98c6",
+        "name": "Salvar ranking.json",
+        "filename": "G:\\QuizPaises-main\\QuizPaises-main\\Projeto2025\\resultados\\ranking.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 990,
+        "y": 380,
+        "wires": [
+            [
+                "df1e5c1257642c97",
+                "71c6ef3fe70ec25c"
+            ]
+        ]
+    },
+    {
+        "id": "df1e5c1257642c97",
+        "type": "http response",
+        "z": "8fb71ab774db98c6",
+        "name": "Resposta",
+        "statusCode": "",
+        "headers": {},
+        "x": 1190,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f946d154c2c8051f",
+        "type": "http in",
+        "z": "8fb71ab774db98c6",
+        "name": "Obter Ranking",
+        "url": "/getRanking",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "14bd7c760f492093"
+            ]
+        ]
+    },
+    {
+        "id": "14bd7c760f492093",
+        "type": "file in",
+        "z": "8fb71ab774db98c6",
+        "name": "Ler ranking.json",
+        "filename": "G:\\QuizPaises-main\\QuizPaises-main\\Projeto2025\\resultados\\ranking.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": true,
+        "encoding": "none",
+        "allProps": false,
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "8dc9cd8236bebc97",
+                "28f07f5060b55855"
+            ]
+        ]
+    },
+    {
+        "id": "8dc9cd8236bebc97",
+        "type": "http response",
+        "z": "8fb71ab774db98c6",
+        "name": "Responder JSON",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 810,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "71c6ef3fe70ec25c",
+        "type": "debug",
+        "z": "8fb71ab774db98c6",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "28f07f5060b55855",
+        "type": "debug",
+        "z": "8fb71ab774db98c6",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 600,
+        "wires": []
+    }
+]

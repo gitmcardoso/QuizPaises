@@ -29,7 +29,7 @@ function carregarRanking() {
                     rankingTableBody.appendChild(tr);
                 });
 
-                const nomeUsuario = localStorage.getItem('nomeUser') || 'Desconhecido';  // Obtém o nome do usuário
+                const nomeUsuario = localStorage.getItem('nomeUser') || 'Desconhecido';  
                 const posicaoUsuario = data.findIndex(player => player.name === nomeUsuario);
 
                 const positionDisplay = document.getElementById('user-position');
