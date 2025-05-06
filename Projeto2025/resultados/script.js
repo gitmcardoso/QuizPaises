@@ -1,5 +1,11 @@
 function carregarRanking() {
-    fetch('https://8857-200-211-208-194.ngrok-free.app/getRanking')
+    fetch('https://8857-200-211-208-194.ngrok-free.app/getRanking', {
+        method: 'GET', 
+        headers: {
+            'ngrok-skip-browser-warning': 'true', 
+            'Content-Type': 'application/json' 
+        }
+    })
         .then(res => res.json())
         .then(data => {
             if (Array.isArray(data) && data.length > 0) {
