@@ -1,5 +1,5 @@
 function carregarRanking() {
-    fetch('https://ba06-200-211-208-194.ngrok-free.app/getRanking', {
+    fetch('https://609a-200-206-76-106.ngrok-free.app/getRanking', {
         method: 'GET', 
         headers: {
             'ngrok-skip-browser-warning': 'true', 
