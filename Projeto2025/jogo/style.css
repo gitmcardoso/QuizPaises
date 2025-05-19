@@ -74,13 +74,13 @@ button {
     margin: 10px 0;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-    border: 2px solid #007BFF;
+    border: 2px solid #293461;
     background-color: #ffffff;
     border-radius: 8px;
 }
 
 button:hover {
-    background-color: #007BFF;
+    background-color: #293461;
     color: #fff;
 }
 
@@ -147,3 +147,73 @@ button:active {
     justify-content: center;
    
   }
+
+
+#nomeDoUser {
+    
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    color: #57CC99;
+    gap: 8px;
+    
+ 
+}
+
+#profile-icon{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+
+}
+
+
+#timer {
+    display: flex;
+    justify-content: space-around;
+    font-family: "Orbitron", "sans-serif";
+    font-size: 55px;
+    font-weight: bold;
+    margin-right: 10px;
+    
+    color: #172953;
+    
+}
+
+.time{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #172953;
+    min-width: 90px;
+
+
+
+}
+
+.separator {
+    padding: 0 10px;
+    color: #525763;
+}
+
+.country__name {
+
+    color:#172953
+
+}
+
+.country__score{
+    color:#172953
+
+}
+
+
+.country__contador{
+
+    color:#172953
+
+}
