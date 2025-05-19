@@ -3,43 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+
+    <title>Ranking List</title>
 </head>
 
 <body>
+    <div class="card">
 
-    <div class="header">
-        <div class="title">
-            <img src="img/logo.png" alt="Logo">
-        </div>
-        <h1 class="tiulo"> FLAGQUEST </h1>
-    </div>
-
-    <div class="content">
-        <div class="ranking">
+        <div class="card-title">
+            <div class="user-position" id="user-position">.</div>
+            <h1>Ranking</h1>
         </div>
 
+        <div class="card-body">
+            <ul class="list" id="ranking-list">
 
-        <div class="tableContent">
-            <table>
-                <thead>
-                    <caption>RANKING - TOP 20</caption>
-                    <br>
-                    <div class="user-position" id="user-position">
-                    </div>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Pontuação</th>
-                        <th>Tempo</th>
-                    </tr>
-                </thead>
-                <tbody id="ranking-table-body">
-                </tbody>
-            </table>
+            </ul>
         </div>
+
     </div>
 
     <script>
@@ -51,37 +41,55 @@
                     'Content-Type': 'application/json' 
                 }
             })
-             
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data) && data.length > 0) {
-                        data.sort((a, b) => b.score - a.score);
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    data.sort((a, b) => b.score - a.score); 
 
-                        const rankingTableBody = document.getElementById('ranking-table-body');
-                        rankingTableBody.innerHTML = ''; 
+                    const rankingList = document.getElementById('ranking-list');
+                    rankingList.innerHTML = ''; 
+                    data.slice(0, 3).forEach((entry, index) => {
+                        const listItem = document.createElement('li');
+                        listItem.classList.add('list-item');
 
-                        data.slice(0, 20).forEach(entry => {
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = `
-                                <td>${entry.name}</td>
-                                <td>${entry.score} pontos</td>
-                                <td>${entry.time} segundos </td>
-                            `;
-                            rankingTableBody.appendChild(tr);
-                        });
-                    } else {
-                        console.error("Os dados do ranking estão em um formato inesperado.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar o ranking:', error);
-                });
+                        let medalIcon;
+                        if (index === 0) medalIcon = 'ouro.jpg';
+                        else if (index === 1) medalIcon = 'prata.jpg';
+                        else if (index === 2) medalIcon = 'bronze.jpg';
+
+                        listItem.innerHTML = `
+                            <div class="list-item-header">
+                                <span class="list-item-header-badge">${index + 1}º</span>
+                                <img src="img/${medalIcon}" alt="" class="list-item-icon">
+                            </div>
+                            <div class="list-item-body">
+                                <span class="list-item-title">${entry.name}</span>
+                                <div class="list-item-details">
+                                    <span class="list-item-subtitle">Pontos ${entry.score}/100</span>
+                                    <span class="list-item-time">Tempo: ${entry.time} segundos</span>
+                                </div>
+                                <div class="list-item-progress-bar">
+                                    <span class="progress" style="width: ${(entry.score)}%;"></span>
+                                </div>
+                            </div>
+                        `;
+
+                        rankingList.appendChild(listItem);
+                    });
+                } else {
+                    console.error("Os dados do ranking estão em um formato inesperado.");
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o ranking:', error);
+            });
         }
 
         window.onload = function() {
             carregarRanking();
         };
     </script>
-</body>
 <script src="script.js"></script>
+</body>
+
 </html>
