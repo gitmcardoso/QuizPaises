@@ -1,83 +1,177 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+*,
+*:after,
+*:before {
   margin: 0;
   padding: 0;
-  text-align: center;
+  border: 0;
+  text-decoration: none;
 }
 
-.header {
+:root {
+  --white: #fff;
+  --black: #131826;
+  --blue: #4fa4b8;
+  --dark: #202740;
+  --purple: #474d84;
+  --orange: #ffae70;
+  --red: #d72337;
+  --green: #82af69;
+}
+
+body * {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: var(--black);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  background-color: rgba(2, 128, 144, 1);
-}
-
-.header img {
-  height: 80px;
-  margin-right: 15px;
-}
-
-h1 {
-  color: white;
-  margin: 0;
-}
-
-.content {
-  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-.tableContent {
+.card {
   width: 100%;
   max-width: 900px;
-  padding: 10px;
-  display: inline-block;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--dark);
+  border-radius: 10px;
+  border: 1px solid rgb(18 216 178/1);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-.table-wrapper {
-  overflow-x: auto;
+.card-title {
+  padding-bottom: 14px;
+  color: var(--white);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-table {
+.list,
+.list-item,
+.list-item-body,
+.list-item-header {
+  display: flex;
+}
+
+.list {
   width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  background-color: white;
-}
-
-caption {
-  caption-side: top;
-  font-size: 1.5rem;
-  font-weight: bold;
   padding: 10px;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-item {
+  width: calc(100% - 20px);
+  max-height: 100px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background-color: var(--dark);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.list-item-header {
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-item-header-badge {
+  position: absolute;
+  margin-top: -20px;
+  margin-left: -100px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  padding: 2px;
+  border-radius: 50%;
+  background-color: var(--red);
   text-align: center;
-  color: #028090;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  color: var(--white);
 }
 
-th, td {
-  padding: 12px;
-  border: 1px solid rgba(2, 128, 144, 1);
-  text-align: center;
+.list-item-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-th {
-  background-color: rgba(2, 128, 144, 1);
-  color: white;
+.list-item-body {
+  width: 80%;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.country__tempo {
-  font-size: 1.9em;
-  color: #333;
-  margin-top: 10px;
+.list-item-title {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.125rem;
+}
+
+.list-item-subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.1rem;
+}
+
+.list-item-time {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--orange);
+  letter-spacing: 0.1rem;
+  margin-top: 4px;
+}
+
+.list-item-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.list-item-progress-bar {
+  height: 8px;
+  width: 100%;
+  margin-top: 2px;
+  background: var(--purple);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.list-item-progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--red);
+  transition: width 0.6s ease;
 }
 
 .user-position{
   font-size: 1.2em;
-  color: #333;
+  color: #c4c4c4;
   margin-top: 10px;
   justify-content: center;
 }
