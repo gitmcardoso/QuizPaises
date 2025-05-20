@@ -118,7 +118,7 @@ async function obterNovaBandeira() {
       ranking.push(userData);
       localStorage.setItem('ranking', JSON.stringify(ranking));
 
-      fetch('https://871f-200-206-76-106.ngrok-free.app/salvarRanking', {
+      fetch('https://01d9-200-206-76-106.ngrok-free.app/salvarRanking', {
         method: 'POST',
         headers: {
           'ngrok-skip-browser-warning': 'true', 
