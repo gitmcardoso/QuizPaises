@@ -5,6 +5,7 @@ let paisesRestantes = [];
 let totalDeBandeiras = 20;
 let nomeUsuario = "";
 
+//guardando o nome do usuario no local storage, após salvar, consumir para o servidor 
 const nome = localStorage.getItem('nomeUser');
 
 
@@ -56,6 +57,7 @@ function verificarResposta(opcaoSelec, paisCorreto) {
   obterNovaBandeira();
 }
 
+//skipar a bandeira obs: perde um ponto 
 function pularBandeira() {
   document.getElementById('next-button').style.display = 'inline-block';
   document.getElementById('next-button').onclick = function () {
@@ -71,11 +73,13 @@ function pularBandeira() {
   };
 }
 
+//update no contador 
 function atualizarContador() {
   const contador = document.getElementById('contador');
   contador.textContent = `Bandeiras restantes: ${paisesRestantes.length}`;
 }
 
+//função assincrona que recebe uma nova bandeira ao ser acionado 
 async function obterNovaBandeira() {
   if (todosPaises.length === 0) {
     const url = 'https://restcountries.com/v3.1/all';
@@ -151,6 +155,7 @@ function formatTime(time) {
 
 obterNovaBandeira();
 
+//cronometro ate 5 minutos 
 let timerDisplay = document.getElementById('timer');
 let time = 300;
 let interval;
