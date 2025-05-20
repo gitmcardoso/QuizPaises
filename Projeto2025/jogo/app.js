@@ -2,7 +2,7 @@ let score = 0;
 let paisCorreto = {};
 let todosPaises = [];
 let paisesRestantes = [];
-let totalDeBandeiras = 10;
+let totalDeBandeiras = 20;
 let nomeUsuario = "";
 
 const nome = localStorage.getItem('nomeUser');
