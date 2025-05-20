@@ -1,3 +1,4 @@
+//carregando o ranking 
 function carregarRanking() {
     fetch('https://01d9-200-206-76-106.ngrok-free.app/getRanking', {
         method: 'GET',
@@ -32,7 +33,7 @@ function carregarRanking() {
                     } else if (index === 2) {
                         medalIcon = 'bronze.jpg'; 
                     }
-
+    
                     listItem.innerHTML = `
                         <div class="list-item-header">
                             <span class="list-item-header-badge">${index + 1}º</span>  <!-- Aqui usamos o index + 1 -->
@@ -80,6 +81,7 @@ function carregarRanking() {
     });
 }
 
+//salvando os tempo de jogo do jogador
 function formatTime(timeInSeconds) {
     let minutes = Math.floor(timeInSeconds / 60);
     let seconds = timeInSeconds % 60;
