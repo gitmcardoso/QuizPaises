@@ -59,10 +59,10 @@ function carregarRanking() {
             const positionDisplay = document.getElementById('user-position'); 
 
             if (posicaoUsuario !== -1) {
-                if (posicaoUsuario < 20) {
-                    positionDisplay.textContent = `Você está no Top 20! Sua posição: ${posicaoUsuario + 1}`;
+                if (posicaoUsuario < 3) {
+                    positionDisplay.textContent = `Você está no Top 3! Sua posição: ${posicaoUsuario + 1}`;
                 } else {
-                    positionDisplay.textContent = `Você não está no Top 20. Sua posição é: ${posicaoUsuario + 1}`;
+                    positionDisplay.textContent = `Você não está no Top 3. Sua posição é: ${posicaoUsuario + 1}`;
                 }
             } else {
                 positionDisplay.textContent = "Você não está no ranking.";
