@@ -176,7 +176,7 @@ body {
   justify-content: center;
 }
 
-.glow-on-hover{
+.glow-on-hover, .ref{
   width: 220px;
   height: 50px;
   border: none;
@@ -187,11 +187,6 @@ body {
   position: absolute;
   z-index: 0;
   border-radius: 10px;
-  top: 740px;
-}
-
-.ref{
-  position: absolute;
   top: 740px;
 }
 
