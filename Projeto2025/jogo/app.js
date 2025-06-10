@@ -2,7 +2,7 @@ let score = 0;
 let paisCorreto = {};
 let todosPaises = [];
 let paisesRestantes = [];
-let totalDeBandeiras = 20;
+let totalDeBandeiras = 5;
 let nomeUsuario = "";
 
 //guardando o nome do usuario no local storage, após salvar, consumir para o servidor 
