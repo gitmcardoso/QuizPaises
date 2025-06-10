@@ -1,88 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script src="./app.js" defer></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-   
-</head>
-
-<body>
+  <body>
     <main>
-        <div class="header">
-            <div class="title">
-                <img src="img/logo.png" alt="Logo">
-                
-                
-            </div>
+      <div class="header">
+        <div class="title">
+          <img src="img/logo.png" alt="Logo" />
+          <audio id="myAudio" autoplay loop>
+            <source src="../audio_jogo.mp3" type="audio/mp3" />
+            Seu navegador não suporta áudio.
+          </audio>
 
-            
-            
-            <h1 class="tiulo"> FLAGQUEST </h1>
+          <button id="muteButton">🔊</button>
 
+          <script>
+            const myAudio = document.getElementById("myAudio");
+            const muteButton = document.getElementById("muteButton");
 
+            window.addEventListener("load", () => {
+              myAudio.volume = 0.5;
+              myAudio.play().catch((err) => {
+                console.log(
+                  "Autoplay falhou, talvez por política do navegador:",
+                  err
+                );
+              });
+            });
 
-            <div id="profile-icon">
-                <i class="bi bi-person-fill"></i>
-               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                 </svg>
-               </div>
-
-            <div id="nomeDoUser">
-                
-            </div>
-
-
-            
-
-            
-
-
+            muteButton.addEventListener("click", () => {
+              myAudio.muted = !myAudio.muted;
+              muteButton.textContent = myAudio.muted ? "🔇" : "🔊";
+            });
+          </script>
         </div>
-        
-       
 
-        <div class="quiz">
-            <div class="country">
-                <img id="country-flag" class="country__flag" src="./img/logo.png" alt="Country Flag">
-                <h2 id="country-name" class="country__name">Acerte o país da bandeira</h2>
-                <div id="country-options" class="country__options">
-                </div>
-                <p id="score" class="country__score">Pontuação: 0</p> 
-                <p id="contador" class="country__contador">Bandeiras restantes: </p> 
-            </div>
-            <button id="next-button" style="display:none;">Próxima Bandeira</button>
+        <h1 class="tiulo">FLAGQUEST</h1>
+
+        <div id="profile-icon">
+          <i class="bi bi-person-fill"></i>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-person-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
+            />
+          </svg>
         </div>
-    
 
-        <div id="timer">
-            
+        <div id="nomeDoUser"></div>
+      </div>
 
-            <div class="time" id="minutes">00</div>
-            <div class="separator">:</div>
-            <div class="time" id="seconds">00</div>
-            <div class="separator">:</div>
-         </div>
-        
+      <div class="quiz">
+        <div class="country">
+          <img
+            id="country-flag"
+            class="country__flag"
+            src="./img/logo.png"
+            alt="Country Flag"
+          />
+          <h2 id="country-name" class="country__name">
+            Acerte o país da bandeira
+          </h2>
+          <div id="country-options" class="country__options"></div>
+          <p id="score" class="country__score">Pontuação: 0</p>
+          <p id="contador" class="country__contador">Bandeiras restantes:</p>
+        </div>
+        <button id="next-button" style="display: none">Próxima Bandeira</button>
+      </div>
+
+      <div id="timer">
+        <div class="time" id="minutes">00</div>
+        <div class="separator">:</div>
+        <div class="time" id="seconds">00</div>
+        <div class="separator">:</div>
+      </div>
     </main>
 
     <script>
-        //recebendo o nome do usuario 
-        let nomeUser = localStorage.getItem('nomeUser') || 'desconhecido';
-        console.log(nomeUser);
-        document.getElementById('nomeDoUser').innerHTML = nomeUser;
+      //recebendo o nome do usuario
+      let nomeUser = localStorage.getItem("nomeUser") || "desconhecido";
+      console.log(nomeUser);
+      document.getElementById("nomeDoUser").innerHTML = nomeUser;
     </script>
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>
