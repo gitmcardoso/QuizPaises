@@ -82,7 +82,7 @@ function atualizarContador() {
 //função assincrona que recebe uma nova bandeira ao ser acionado 
 async function obterNovaBandeira() {
   if (todosPaises.length === 0) {
-    const url = 'https://restcountries.com/v3.1/all';
+    const url = 'https://restcountries.com/v3.1/all?fields=name,flags,translations';
     const response = await fetch(url);
     todosPaises = await response.json();
     paisesRestantes = [...todosPaises]
